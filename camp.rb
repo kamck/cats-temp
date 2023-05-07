@@ -27,7 +27,7 @@ module CatsTemp::Controllers
   class Style < R "styles\.css"
     def get
       @headers["content-type"] = "text/css; charset=utf-8"
-      DATA.read
+      File.read(__FILE__).gsub(/.*__END__/m, "")
     end
   end
 end
@@ -47,8 +47,8 @@ module CatsTemp::Views
   end
 
   def index
-    div { "#{@f.round(1)}&deg;F" }
-    div { "#{@c.round(1)}&deg;C" }
+    div.far! { "#{@f.round(1)}&deg;F" }
+    div.cel! { "#{@c.round(1)}&deg;C" }
   end
 end
 
@@ -56,4 +56,14 @@ __END__
 body {
   background-color: black;
   color: white;
+  text-align: right
+  font-family: sans-serif;
+}
+
+#far {
+  font-size: 5.5em;
+}
+
+#cel {
+  font-size: 3em;
 }
