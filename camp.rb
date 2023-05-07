@@ -23,20 +23,13 @@ module CatsTemp::Controllers
       end
     end
   end
-
-  class Style < R "styles\.css"
-    def get
-      @headers["content-type"] = "text/css; charset=utf-8"
-      File.read(__FILE__).gsub(/.*__END__/m, "")
-    end
-  end
 end
 
 module CatsTemp::Views
   def layout
     html do
       head do
-        link rel: "stylesheet", type: "hext/css", href: "styles.css", media: "screen"
+        style { File.read(__FILE__).gsub(/.*__END__/m, "") }
         title "Donna's Temp"
       end
 
@@ -56,7 +49,7 @@ __END__
 body {
   background-color: black;
   color: white;
-  text-align: right
+  text-align: right;
   font-family: sans-serif;
 }
 
