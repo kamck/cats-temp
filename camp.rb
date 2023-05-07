@@ -23,12 +23,20 @@ module CatsTemp::Controllers
       end
     end
   end
+
+  class Style < R "styles\.css"
+    def get
+      @headers["content-type"] = "text/css; charset=utf-8"
+      DATA.read
+    end
+  end
 end
 
 module CatsTemp::Views
   def layout
     html do
       head do
+        link rel: "stylesheet", type: "hext/css", href: "styles.css", media: "screen"
         title "Donna's Temp"
       end
 
@@ -43,3 +51,9 @@ module CatsTemp::Views
     div { "#{@c.round(1)}&deg;C" }
   end
 end
+
+__END__
+body {
+  background-color: black;
+  color: white;
+}
